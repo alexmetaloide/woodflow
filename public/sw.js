@@ -1,8 +1,10 @@
+const BASE = '/woodflow';
+
 const CACHE_NAME = 'woodflow-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json'
+  BASE + '/',
+  BASE + '/index.html',
+  BASE + '/manifest.json'
 ];
 
 self.addEventListener('install', event => {
@@ -15,8 +17,14 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+  // Strip the base path for cache matching
+  let cacheKey = event.request;
+  if (url.pathname.startsWith(BASE)) {
+    cacheKey = BASE + url.pathname.slice(BASE.length) || BASE + '/';
+  }
   event.respondWith(
-    caches.match(event.request)
+    caches.match(cacheKey)
       .then(response => {
         if (response) {
           return response;

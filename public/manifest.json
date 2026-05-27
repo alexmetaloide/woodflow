@@ -2,7 +2,7 @@
   "name": "Visão de Ganhos e Retiradas",
   "short_name": "Ganhos",
   "description": "Controle de serviços de marcenaria e retiradas quinzenais",
-  "start_url": "/",
+  "start_url": "/woodflow/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0c0c0c",
