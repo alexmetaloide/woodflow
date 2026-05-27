@@ -31,8 +31,8 @@ export default function Sidebar({
       {/* TopNavBar (Mobile) */}
       <nav className="lg:hidden sticky top-0 z-50 flex justify-between items-center px-4 py-3 w-full bg-[#0F0F10]/90 backdrop-blur-md border-b border-[#2B2B2B]">
         <div className="flex items-center gap-2">
-          <h1 className="font-sans font-black text-xl tracking-tighter text-white">WoodFlow</h1>
-          <span className="text-[10px] bg-[#1C1C1C] border border-[#2B2B2B] text-stone-400 px-1.5 py-0.5 rounded font-mono uppercase tracking-wider">PWA</span>
+          <h1 className="font-sans font-black text-xl tracking-tighter text-white">Ganhos</h1>
+          <span className="text-[10px] bg-[#1C1C1C] border border-[#2B2B2B] text-stone-400 px-1.5 py-0.5 rounded font-mono uppercase tracking-wider">v1.0</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -59,8 +59,8 @@ export default function Sidebar({
             <div>
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#2B2B2B]">
                 <div>
-                  <h3 className="font-sans font-bold text-white tracking-tighter">WoodFlow Menu</h3>
-                  <p className="text-[11px] text-stone-500 font-mono tracking-wide">Foco e Produtividade</p>
+                  <h3 className="font-sans font-bold text-white tracking-tighter">Menu</h3>
+                  <p className="text-[11px] text-stone-500 font-mono tracking-wide">Ganhos e Retiradas</p>
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
@@ -116,8 +116,8 @@ export default function Sidebar({
       <aside className="hidden lg:flex flex-col h-screen border-r border-[#2B2B2B] py-8 bg-[#151515] w-64 fixed left-0 top-0 z-30 justify-between">
         <div>
           <div className="px-6 mb-12">
-            <h1 className="font-sans font-black text-3xl text-white tracking-tighter leading-none">WoodFlow</h1>
-            <p className="text-xs font-semibold text-stone-500 uppercase tracking-widest mt-2">Master Craftsman</p>
+            <h1 className="font-sans font-black text-3xl text-white tracking-tighter leading-none">Ganhos</h1>
+            <p className="text-xs font-semibold text-stone-500 uppercase tracking-widest mt-2">Visão Financeira</p>
           </div>
 
           <div className="flex flex-col gap-1 px-3">

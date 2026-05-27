@@ -268,11 +268,11 @@ export default function SettingsView({
           <div>
             <div className="flex items-center gap-2 border-b border-[#2B2B2B] pb-3 mb-3">
               <Info size={18} className="text-stone-300" />
-              <h3 className="font-sans font-bold text-base text-white">Sobre o WoodFlow</h3>
+              <h3 className="font-sans font-bold text-base text-white">Sobre o App</h3>
             </div>
             
             <p className="text-xs text-stone-400 leading-relaxed font-normal">
-              WoodFlow é um app projetado para marcenarias e prestadores de serviços sob medida. Ele é autônomo, não transfere segredos comerciais ou planilhas financeiras de clientes para servidores na nuvem, e preserva desempenho de baixa latência em tablets de oficina e telefones celulares.
+              Visão de Ganhos e Retiradas é um app projetado para marcenarias e prestadores de serviços sob medida. Ele é autônomo, não transfere segredos comerciais ou planilhas financeiras de clientes para servidores na nuvem, e preserva desempenho de baixa latência em tablets de oficina e telefones celulares.
             </p>
           </div>
 

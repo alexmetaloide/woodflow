@@ -1,6 +1,6 @@
 {
-  "name": "WoodFlow - Organização de Marcenaria",
-  "short_name": "WoodFlow",
+  "name": "Visão de Ganhos e Retiradas",
+  "short_name": "Ganhos",
   "description": "Controle de serviços de marcenaria e retiradas quinzenais",
   "start_url": "/",
   "display": "standalone",

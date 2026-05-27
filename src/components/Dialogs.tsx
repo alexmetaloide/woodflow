@@ -331,7 +331,7 @@ export function WithdrawalDialog({
               required
             />
             <span className="text-[9px] font-normal text-stone-500 italic mt-0.5 leading-relaxed">
-              O WoodFlow associará esta retirada à Quinzena correspondente de forma automatizada.
+              O app associará esta retirada à Quinzena correspondente de forma automatizada.
             </span>
           </div>
 
