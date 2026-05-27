@@ -27,7 +27,7 @@
     <title>WoodFlow - Gestão de Marcenaria</title>
     
     <!-- PWA configuration link -->
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/woodflow/manifest.json" />
     <meta name="theme-color" content="#151515" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -35,13 +35,12 @@
   </head>
   <body class="bg-[#0F0F10] text-[#F5F5F5]">
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
 
     <!-- Simple Service Worker registration -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+          navigator.serviceWorker.register('/woodflow/sw.js')
             .then(reg => console.log('ServiceWorker registrado com sucesso!', reg.scope))
             .catch(err => console.log('Erro ao registrar ServiceWorker:', err));
         });
