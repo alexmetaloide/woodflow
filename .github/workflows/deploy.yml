@@ -28,7 +28,11 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run build
+      - name: Clean Vite cache and force build
+        run: |
+          rm -rf node_modules/.vite
+          rm -rf ~/.cache/vite
+          npm run build
 
       - name: Copy index.html to 404.html for SPA fallback
         run: cp dist/index.html dist/404.html
