@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
-import { LayoutDashboard, Wrench, DollarSign, Settings as SettingsIcon, Plus, Menu, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { LayoutDashboard, Wrench, DollarSign, Settings as SettingsIcon, Plus, Menu, X, Download } from 'lucide-react';
 
 interface SidebarProps {
   currentView: 'dashboard' | 'services' | 'withdrawals' | 'settings';
@@ -18,6 +18,22 @@ export default function Sidebar({
   onAddService,
 }: SidebarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstall = () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => setDeferredPrompt(null));
+  };
 
   const navItems = [
     { id: 'dashboard' as const, label: 'Dashboard', icon: LayoutDashboard },
@@ -108,6 +124,15 @@ export default function Sidebar({
               </button>
               <p className="text-center text-[10px] text-stone-600 mt-4 font-mono">v1.2.0 (Offline-First)</p>
             </div>
+            {deferredPrompt && (
+              <button
+                onClick={handleInstall}
+                className="w-full flex items-center justify-center gap-2 mt-3 border border-[#2B2B2B] text-stone-300 hover:text-white hover:border-stone-500 transition-all rounded py-2 text-xs font-semibold"
+              >
+                <Download size={14} />
+                Instalar App
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -153,6 +178,15 @@ export default function Sidebar({
           <div className="text-center mt-6">
             <span className="text-[10px] text-stone-600 font-mono tracking-widest block uppercase">BRL WORKSPACE</span>
           </div>
+          {deferredPrompt && (
+            <button
+              onClick={handleInstall}
+              className="w-full flex items-center justify-center gap-1.5 mt-4 border border-[#2B2B2B] text-stone-300 hover:text-white hover:border-stone-500 transition-all rounded py-2 text-xs font-semibold"
+            >
+              <Download size={14} />
+              Instalar App
+            </button>
+          )}
         </div>
       </aside>
     </>
