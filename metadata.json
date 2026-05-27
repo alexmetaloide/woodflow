@@ -1,0 +1,6 @@
+{
+  "name": "WoodFlow",
+  "description": "Aplicativo premium para controle de serviços de marcenaria e retiradas quinzenais",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

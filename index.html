@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <!-- Patch window.fetch setter to prevent Uncaught TypeError on read-only fetch in iframe environments -->
+    <script>
+      (function() {
+        try {
+          var _originalFetch = window.fetch;
+          var _customFetch = _originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _customFetch;
+            },
+            set: function(val) {
+              _customFetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          console.warn("Could not redefine window.fetch getter/setter:", e);
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WoodFlow - Gestão de Marcenaria</title>
+    
+    <!-- PWA configuration link -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#151515" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="https://img.icons8.com/ios-filled/192/ffffff/wooden-box.png" />
+  </head>
+  <body class="bg-[#0F0F10] text-[#F5F5F5]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Simple Service Worker registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('ServiceWorker registrado com sucesso!', reg.scope))
+            .catch(err => console.log('Erro ao registrar ServiceWorker:', err));
+        });
+      }
+    </script>
+  </body>
+</html>
+
