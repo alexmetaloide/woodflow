@@ -1,35 +1,49 @@
 const BASE = '/woodflow';
+const CACHE_NAME = 'woodflow-cache-v2';
 
-const CACHE_NAME = 'woodflow-cache-v1';
-const urlsToCache = [
-  BASE + '/',
-  BASE + '/index.html',
-  BASE + '/manifest.json'
-];
+self.addEventListener('install', () => {
+  self.skipWaiting();
+});
 
-self.addEventListener('install', event => {
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
+    Promise.all([
+      self.clients.claim(),
+      caches.keys().then(keys =>
+        Promise.all(keys.map(k => {
+          if (k !== CACHE_NAME) return caches.delete(k);
+        }))
+      )
+    ])
   );
 });
 
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
-  // Strip the base path for cache matching
-  let cacheKey = event.request;
-  if (url.pathname.startsWith(BASE)) {
-    cacheKey = BASE + url.pathname.slice(BASE.length) || BASE + '/';
+
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then(res => {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          return res;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
   }
+
+  if (!url.pathname.startsWith(BASE)) return;
+
   event.respondWith(
-    caches.match(cacheKey)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
+    caches.match(event.request).then(cached => {
+      if (cached) return cached;
+      return fetch(event.request).then(res => {
+        const clone = res.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        return res;
+      });
+    })
   );
 });
